@@ -23,6 +23,7 @@ jobs:
       run: echo "Hello, GitHub Actions!"
 
   deploy:
+    if: github.event_name == 'workflow_dispatch'
     needs: build
     runs-on: ubuntu-latest
     environment:
@@ -38,8 +39,9 @@ jobs:
       run: echo "The value of TEST is $TEST"
 
   deploy2:
+    if: github.event_name == 'workflow_dispatch'
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-    - name: Deploy to 
+    - name: Deploy to
       run: echo "Deploying to test"
