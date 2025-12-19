@@ -11,7 +11,7 @@ on:
         options:
         - dev
         - stg
-        - prd
+        - test
         default: 'dev'
 jobs:
   build:
@@ -25,11 +25,18 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment }}
+    environment:
+            name: ${{ github.event.inputs.environment }}
     env:
       ENV: ${{ github.event.inputs.environment }}
       TEST: ${{ secrets.TEST }}
     steps:
+    - name: Check for TEST secret
+      run: |
+        if [ -z "${{ env.TEST }}" ]; then
+          echo "Error: The 'TEST' secret is not set. Please add it in the repository or environment settings."
+          exit 1
+        fi
     - name: Deploy to ${{ github.event.inputs.environment }}
       run: echo "Deploying to ${{ github.event.inputs.environment }} with ENV=${ENV}"
     - name: Show TEST secret
@@ -39,5 +46,5 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-    - name: Deploy to 
+    - name: Deploy to
       run: echo "Deploying to test"
