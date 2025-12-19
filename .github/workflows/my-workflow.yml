@@ -28,6 +28,9 @@ jobs:
     environment: ${{ github.event.inputs.environment }}
     env:
       ENV: ${{ github.event.inputs.environment }}
+      TEST: ${{ secrets.TEST }}
     steps:
     - name: Deploy to ${{ github.event.inputs.environment }}
       run: echo "Deploying to ${{ github.event.inputs.environment }} with ENV=${ENV}"
+    - name: Show TEST secret
+      run: echo "The value of TEST is ${{ env.TEST }}"
