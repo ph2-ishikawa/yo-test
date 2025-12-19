@@ -38,12 +38,6 @@ jobs:
   deploy2:
     needs: deploy
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment }}
-    env:
-      ENV: ${{ github.event.inputs.environment }}
-      TEST: ${{ secrets.TEST }}
     steps:
-    - name: Deploy to ${{ github.event.inputs.environment }}
-      run: echo "Deploying to ${{ github.event.inputs.environment }} with ENV=${ENV}"
-    - name: Show TEST secret
-      run: echo "The value of TEST is ${{ env.TEST }}"
+    - name: Deploy to 
+      run: echo "Deploying to test"
