@@ -36,7 +36,7 @@ jobs:
       run: echo "The value of TEST is ${{ env.TEST }}"
 
   deploy2:
-    needs: build
+    needs: deploy
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment }}
     env:
