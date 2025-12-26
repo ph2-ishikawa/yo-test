@@ -32,7 +32,7 @@ jobs:
     - name: Check for TEST secret
       run: echo "${{ environment.name }}"
     - name: Deploy to ${{ environment.name }}
-      run: echo "Deploying to environment: ${{ environment.name }}"
+      run: echo "Deploying to environment： ${{ environment.name }}"
     - name: Show TEST secret
       env:
         TEST: ${{ secrets.TEST }}
